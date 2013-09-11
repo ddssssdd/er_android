@@ -91,6 +91,7 @@ public class LoginActivity extends Activity {
 	private void choose(Relocatee relocatee){
 		AppSettings.relocatee = relocatee;
 		AppSettings.relocateId = relocatee.RelocateeID;
+		this.setResult(RESULT_OK);
 		finish();
 	}
 }

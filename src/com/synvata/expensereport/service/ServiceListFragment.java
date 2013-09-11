@@ -13,7 +13,7 @@ public class ServiceListFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		View view = inflater.inflate(R.layout.fragment_report,	container,false);
+		View view = inflater.inflate(R.layout.fragment_service,	container,false);
 		return view;
 	}
 }

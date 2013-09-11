@@ -46,6 +46,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.synvata.expensereport.login.LoginActivity"></activity>
+        <activity android:name="com.synvata.expensereport.report.ReportListFragment"></activity>
     </application>
 
 </manifest>

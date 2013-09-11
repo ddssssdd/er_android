@@ -13,7 +13,7 @@ public class ProfileFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		View view = inflater.inflate(R.layout.fragment_report,	container,false);
+		View view = inflater.inflate(R.layout.fragment_profile,	container,false);
 		return view;
 	}
 }

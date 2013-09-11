@@ -16,11 +16,12 @@ public final class R {
     }
     public static final class id {
         public static final int btnLogin=0x7f070002;
-        public static final int content=0x7f070003;
-        public static final int expense=0x7f070005;
-        public static final int profile=0x7f070007;
-        public static final int report=0x7f070004;
-        public static final int service=0x7f070006;
+        public static final int expense=0x7f070006;
+        public static final int pager=0x7f070003;
+        public static final int pager_title_strip=0x7f070004;
+        public static final int profile=0x7f070008;
+        public static final int report=0x7f070005;
+        public static final int service=0x7f070007;
         public static final int txtPassword=0x7f070001;
         public static final int txtUsername=0x7f070000;
     }
@@ -30,7 +31,8 @@ public final class R {
         public static final int fragment_profile=0x7f030002;
         public static final int fragment_report=0x7f030003;
         public static final int fragment_service=0x7f030004;
-        public static final int main_activity=0x7f030005;
+        public static final int fragmentlist_report=0x7f030005;
+        public static final int main_activity=0x7f030006;
     }
     public static final class menu {
         public static final int menu1=0x7f060000;

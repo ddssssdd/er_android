@@ -12,5 +12,6 @@ public class AppSettings {
 	public static Person person;
 	public static List<Relocatee> relocatees;
 	public static Relocatee relocatee;
+	public static int LOGIN_SUCCESS = 100;
 	
 }

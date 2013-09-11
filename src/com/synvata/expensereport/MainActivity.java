@@ -1,92 +1,59 @@
 package com.synvata.expensereport;
 
 import com.synvata.expensereport.base.AppSettings;
-import com.synvata.expensereport.base.HttpActivity;
-
-import com.synvata.expensereport.expense.ExpenseListFragment;
+import com.synvata.expensereport.base.BaseFragmentPagerAdapter;
 import com.synvata.expensereport.login.LoginActivity;
-import com.synvata.expensereport.profile.ProfileFragment;
-import com.synvata.expensereport.report.ReportListFragment;
-import com.synvata.expensereport.service.ServiceListFragment;
-
+import com.synvata.expensereport.report.ReportPagerAdapter;
 import android.app.ActionBar;
-import android.app.ActionBar.Tab;
-import android.app.ActionBar.TabListener;
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.app.FragmentManager;
 
-public class MainActivity extends HttpActivity {
+import android.content.Intent;
 
-	private Fragment _currentFragment;
+public class MainActivity extends FragmentActivity {
+
+	private BaseFragmentPagerAdapter _adapter;
+	private ViewPager _viewPager;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.main_activity);
+		_adapter = new ReportPagerAdapter(getSupportFragmentManager());
+        final ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        _viewPager = (ViewPager)findViewById(R.id.pager);
+        _viewPager.setAdapter(_adapter);
+        
+        
 		if (!AppSettings.isLogin){
 			Intent intent = new Intent(this,LoginActivity.class);
-			startActivity(intent);
+			this.startActivityForResult(intent, AppSettings.LOGIN_SUCCESS);
+			return;
 		}else
 		{
-			//load latest data;			
+			_adapter.loadData();
 		}
-		/*
-		ActionBar bar = this.getActionBar();
-		bar.setTitle("ExpenseReport");
-		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		Tab tab1 = bar.newTab();
-		tab1.setText("Tab1");
-		tab1.setTabListener(new TabListener(){
-
-			@Override
-			public void onTabSelected(Tab tab, FragmentTransaction ft) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onTabReselected(Tab tab, FragmentTransaction ft) {
-				// TODO Auto-generated method stub
-				
-			}});
-		bar.addTab(tab1);
-		Tab tab2 = bar.newTab();
-		tab2.setText("Tab2");
-		tab2.setTabListener(new TabListener(){
-
-			@Override
-			public void onTabSelected(Tab tab, FragmentTransaction ft) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onTabReselected(Tab tab, FragmentTransaction ft) {
-				// TODO Auto-generated method stub
-				
-			}});
-		bar.addTab(tab2);
-		*/
+		
+        
+       
 	}
 	
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode==RESULT_OK){
+			if (requestCode==AppSettings.LOGIN_SUCCESS){
+				_adapter.loadData();
+			}
+		}
+		
+	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -94,7 +61,7 @@ public class MainActivity extends HttpActivity {
 		inflater.inflate(R.menu.menu1, menu);
 		return true;
 	}
-
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		
@@ -102,18 +69,14 @@ public class MainActivity extends HttpActivity {
 		
 		switch(item.getItemId()){
 		case R.id.report:
-			createFragment( new ReportListFragment());			
 			
 			break;
 		case R.id.expense:
 			
-			createFragment( new ExpenseListFragment());
 			break;
 		case R.id.service:
-			createFragment( new ServiceListFragment());
 			break;
 		case R.id.profile:
-			createFragment( new ProfileFragment());
 			
 			AppSettings.isLogin = false;
 			AppSettings.person = null;
@@ -123,19 +86,6 @@ public class MainActivity extends HttpActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	private void createFragment(Fragment f)
-	{
-		FragmentManager fragmentManger = getFragmentManager();
-		FragmentTransaction transaction = fragmentManger.beginTransaction();
-		if (_currentFragment!=null){
-			transaction.remove(_currentFragment);
-			_currentFragment = null;
-		}
-		_currentFragment = f;
-		
-		transaction.add(R.id.content,f);
-		transaction.commit();
-		
-	}
+	
 	
 }

@@ -90,7 +90,8 @@ public class LoginActivity extends Activity {
 	}
 	private void choose(Relocatee relocatee){
 		AppSettings.relocatee = relocatee;
-		AppSettings.relocateId = relocatee.RelocateeID;
+		AppSettings.relocateeId = relocatee.RelocateeID;
+		AppSettings.save(this);
 		this.setResult(RESULT_OK);
 		finish();
 	}

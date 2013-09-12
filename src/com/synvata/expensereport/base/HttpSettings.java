@@ -9,6 +9,7 @@ import java.net.URLEncoder;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.util.Log;
@@ -82,5 +83,37 @@ public class HttpSettings {
 			log(e.getMessage());
 		}
 		return false;
+	}
+	public static JSONObject getSuccessJSON(final String result)
+	{
+		try
+		{
+			JSONObject json = new JSONObject(result);
+			if (json.has("status") && !json.isNull("status")){
+				return json.getJSONObject("result");
+			}
+			
+			
+		}catch(Exception e)
+		{
+			log(e.getMessage());
+		}
+		return null;
+	}
+	public static JSONArray getSuccessJSONList(final String result)
+	{
+		try
+		{
+			JSONObject json = new JSONObject(result);
+			if (json.has("status") && !json.isNull("status")){
+				return json.getJSONArray("result");
+			}
+			
+			
+		}catch(Exception e)
+		{
+			log(e.getMessage());
+		}
+		return null;
 	}
 }

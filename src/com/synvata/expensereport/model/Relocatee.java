@@ -5,6 +5,10 @@ import org.json.JSONObject;
 import android.util.Log;
 
 public class Relocatee implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public int PolicyID;
 	public int RelocateeID;
 	public int UserID;

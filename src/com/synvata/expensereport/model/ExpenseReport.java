@@ -5,6 +5,10 @@ import org.json.JSONObject;
 import android.util.Log;
 
 public class ExpenseReport implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public int ExpenseReportID;
 	public int RelocateeID;
 	public int ClientID;

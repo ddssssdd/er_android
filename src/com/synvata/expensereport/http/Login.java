@@ -105,45 +105,67 @@ public class Login {
 		int id = checkLogin(username);
 		DBHelper dbhelper =new DBHelper(_context);		
 		SQLiteDatabase db =dbhelper.getWritableDatabase();
-		
-		if (id==0){			
-			db.execSQL("Insert into LoginUser(username,password) values(?,?)", new Object[]{username,password});	
-		}else{
-			ContentValues cv = new ContentValues();
-			cv.put("password", password);
-			db.update("LoginUser", cv, "id=?", new String[]{String.valueOf(id)});
+		db.beginTransaction();
+		try
+		{
+			if (id==0){			
+				db.execSQL("Insert into LoginUser(username,password) values(?,?)", new Object[]{username,password});	
+			}else{
+				ContentValues cv = new ContentValues();
+				cv.put("password", password);
+				db.update("LoginUser", cv, "id=?", new String[]{String.valueOf(id)});
+			}
 		}
+		finally
+		{
+			db.endTransaction();
+			db.close();
+		}
+		
 		
 	}
 	private int checkLogin(final String username){
 		DBHelper dbhelper =new DBHelper(_context);		
 		SQLiteDatabase db =dbhelper.getReadableDatabase();
 		Cursor c = db.rawQuery("select id from LoginUser where username=?",new String[]{username});
-		if (c.moveToNext()){
-			return c.getInt(0);
-		}else{
-			return 0;
+		try
+		{
+			if (c.moveToNext()){
+				return c.getInt(0);
+			}else{
+				return 0;
+			}
+		}finally
+		{
+			c.close();
+			db.close();
 		}
+		
+	
 	}
 	public LoginList loginHistroy()
 	{
 		SQLiteDatabase db = (new DBHelper(_context)).getReadableDatabase();
 		Cursor c= db.rawQuery("select username,password from LoginUser order by id desc", null);
 		LoginList result = new LoginList();
-		
-		while (c.moveToNext()){
-			LoginUser user = new LoginUser();
-			user.username = c.getString(0);
-			user.password = c.getString(1);
-			if (result.lastLoginUser==null){
-				result.lastLoginUser = user;
+		try{
+			while (c.moveToNext()){
+				LoginUser user = new LoginUser();
+				user.username = c.getString(0);
+				user.password = c.getString(1);
+				if (result.lastLoginUser==null){
+					result.lastLoginUser = user;
+				}
+				if (result.list==null){
+					result.list = new ArrayList<LoginUser>();
+				}
+				result.list.add(user);
 			}
-			if (result.list==null){
-				result.list = new ArrayList<LoginUser>();
-			}
-			result.list.add(user);
-		}
 		return result;
+		}finally{
+			c.close();
+			db.close();
+		}
 	
 	}
 	public class LoginList

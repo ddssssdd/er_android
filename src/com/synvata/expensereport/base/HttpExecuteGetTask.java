@@ -11,7 +11,7 @@ import java.net.URL;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class HttpExecuteGetTask extends AsyncTask<String, Void, String> {
+public abstract class HttpExecuteGetTask extends AsyncTask<String, Void, String> {
 	private static final String DEBUG_TAG = "Http.Get";	
 	@Override
 	protected String doInBackground(String... urls) {
@@ -24,9 +24,7 @@ public class HttpExecuteGetTask extends AsyncTask<String, Void, String> {
 	}
 
 	@Override
-	protected void onPostExecute(String result) {
-		
-	}
+	abstract protected void onPostExecute(String result); 
 	private String httpGetUrl(final String urlString) throws IOException
 	{
 		InputStream is = null;

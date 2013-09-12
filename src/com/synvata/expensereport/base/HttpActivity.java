@@ -25,7 +25,7 @@ public class HttpActivity extends Activity {
 		new HttpExecuteGetTask(){
 			@Override
 			protected void onPostExecute(String result) {				
-				super.onPostExecute(result);
+				
 				callback.processResponse(result);
 			}
 		}.execute(url);

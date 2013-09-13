@@ -41,15 +41,14 @@ public class ServiceFragment extends Fragment {
 	}
 	
 	protected void setupListItem(ViewHolder holder,RelocateeService info){
-		holder.title.setText(info.Name);
-		holder.detail.setText(info.Description);
-		holder.action.setText(info.ServiceStatus);
+		holder.title.setText(info.Description);
+		holder.detail.setText(info.ServiceStatus);
+		
 	}
 	
 	protected void initListItem(ViewHolder holder,View convertView){
-		holder.title = (TextView)convertView.findViewById(R.id.txt_listitem_detail_title);
-		holder.detail = (TextView)convertView.findViewById(R.id.txt_listitem_detail_detail);
-		holder.action = (TextView)convertView.findViewById(R.id.txt_listitem_detail_right);
+		holder.title = (TextView)convertView.findViewById(R.id.txt_left);
+		holder.detail = (TextView)convertView.findViewById(R.id.txt_right);
 		convertView.setTag(holder);
 //		convertView.setBackgroundDrawable(R.drawable.corner_list_item);
 //		convertView.setBackgroundResource(R.drawable.bk2);
@@ -92,7 +91,7 @@ public class ServiceFragment extends Fragment {
 			ViewHolder holder = null;
 			if (convertView==null){
 				holder = new ViewHolder();
-				convertView = mInflater.inflate(R.layout.listitem_report, null);
+				convertView = mInflater.inflate(R.layout.listitem_leftright, null);
 				initListItem(holder,convertView);
 				
 			}else{

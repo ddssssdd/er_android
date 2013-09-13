@@ -31,7 +31,7 @@ public class MainActivity extends FragmentActivity {
 		setContentView(R.layout.main_activity);
 		
         final ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(false);
         _viewPager = (ViewPager)findViewById(R.id.pager);
         actionBar.setHomeButtonEnabled(false);
         

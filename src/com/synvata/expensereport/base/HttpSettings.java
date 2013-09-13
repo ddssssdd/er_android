@@ -20,7 +20,8 @@ public class HttpSettings {
 	public static final int CONNECT_TIMEOUT = 15;
 	
 	
-	public static final String ServerUrl = "http://10.4.30.190:4205/api/";
+	//public static final String ServerUrl = "http://10.4.30.190:4205/api/";
+	public static final String ServerUrl = "http://apps.synvata.com:8087/ers/api/";
 	
 	
 	public static String readInputStream(InputStream stream) throws IOException,UnsupportedEncodingException{
@@ -64,7 +65,8 @@ public class HttpSettings {
 	}
 	public static void log(String logInformation)
 	{
-		if (HttpSettings.isOutputDebug){
+		if (HttpSettings.isOutputDebug && logInformation!=null){
+			
 			Log.d("Http.Information", logInformation);
 		}
 		

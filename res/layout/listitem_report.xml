@@ -19,6 +19,7 @@
             android:id="@+id/txt_listitem_detail_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/blue"
             android:textSize="16sp" />
         <View android:layout_width="match_parent"
             android:layout_height="10dp"/>
@@ -45,8 +46,9 @@
             android:id="@+id/txt_listitem_detail_right"
             android:layout_width="match_parent"
             android:layout_height="match_parent"            
-            android:gravity="center"            
-            android:textSize="12sp" />
+            android:gravity="center"      
+            android:textColor="@color/gray"      
+            android:textSize="14sp" />
     </LinearLayout>
 
 </LinearLayout>

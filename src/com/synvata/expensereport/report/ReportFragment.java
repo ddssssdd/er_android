@@ -40,8 +40,9 @@ public class ReportFragment extends Fragment {
 	}
 	
 	protected void setupListItem(ViewHolder holder,ExpenseReport info){
+		//String detail = info.PeriodBeginDate.substring(0, 10)+" - "+info.PeriodEndDate.substring(0,10);
 		holder.title.setText(info.Name);
-		holder.detail.setText(info.ReportDate);
+		holder.detail.setText(info.detail());
 		holder.action.setText(info.Description);
 	}
 	

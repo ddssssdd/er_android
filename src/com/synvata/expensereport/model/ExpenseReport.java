@@ -33,7 +33,14 @@ public class ExpenseReport implements Serializable {
 
 	public ExpenseReport() {
 	}
-
+	public String detail()
+	{
+		if (PeriodBeginDate==null)
+			PeriodBeginDate ="           ";
+		if (PeriodEndDate==null)
+			PeriodEndDate = "           ";
+		return  PeriodBeginDate.substring(0, 10)+" - "+ PeriodEndDate.substring(0,10);
+	}
 	public ExpenseReport(JSONObject result) {
 		processJSON(result);
 	}
@@ -59,9 +66,13 @@ public class ExpenseReport implements Serializable {
 			if (result.has("PeriodBeginDate")
 					&& !result.isNull("PeriodBeginDate")) {
 				PeriodBeginDate = result.getString("PeriodBeginDate");
+			}else{
+				PeriodBeginDate = "           ";
 			}
 			if (result.has("PeriodEndDate") && !result.isNull("PeriodEndDate")) {
 				PeriodEndDate = result.getString("PeriodEndDate");
+			}else{
+				PeriodEndDate = "           ";
 			}
 			if (result.has("ReportDate") && !result.isNull("ReportDate")) {
 				ReportDate = result.getString("ReportDate");

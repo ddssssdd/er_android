@@ -43,7 +43,8 @@ public class ProfileActivity extends FragmentActivity implements
 		setContentView(R.layout.activity_profile);
 		_sections = new ArrayList<ProfileSection>();
 		final ActionBar actionBar = getActionBar();
-		
+		actionBar.setHomeButtonEnabled(true);
+		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setTitle("Profile");
 		_adapter = new ProfilePagerAdapter(this.getSupportFragmentManager());
@@ -86,6 +87,9 @@ public class ProfileActivity extends FragmentActivity implements
 			Intent intent = new Intent(this,LoginActivity.class);
 			startActivityForResult(intent, AppSettings.LOGIN_SUCCESS);
 			this.finish();
+			break;
+		case android.R.id.home:
+			finish();
 			break;
 		}
 		return super.onOptionsItemSelected(item);

@@ -45,7 +45,9 @@ public class ExpenseFragment extends Fragment {
 			VW_Expense info = (VW_Expense)obj;
 			holder.title.setText(info.ExpenseCodeDescription);
 			holder.detail.setText(info.ExpenseGroupFullName);
-			holder.action.setText(info.ReportDate);
+			if (info.ReportDate!=null)
+				holder.action.setText(info.ReportDate.substring(0, 10));
+			
 		}else{
 			KeyValue info = (KeyValue)obj;
 			holder.title.setText(info.key);
@@ -54,12 +56,16 @@ public class ExpenseFragment extends Fragment {
 	}
 	
 	protected void initListItem(ViewHolder holder,View convertView){
-		holder.title = (TextView)convertView.findViewById(R.id.txt_listitem_detail_title);
-		holder.detail = (TextView)convertView.findViewById(R.id.txt_listitem_detail_detail);
-		holder.action = (TextView)convertView.findViewById(R.id.txt_listitem_detail_right);
+		if (index==1){
+			holder.title = (TextView)convertView.findViewById(R.id.txt_listitem_detail_title);
+			holder.detail = (TextView)convertView.findViewById(R.id.txt_listitem_detail_detail);
+			holder.action = (TextView)convertView.findViewById(R.id.txt_listitem_detail_right);
+		}else{
+			holder.title = (TextView)convertView.findViewById(R.id.txt_left);
+			holder.detail = (TextView)convertView.findViewById(R.id.txt_right);
+		}
 		convertView.setTag(holder);
-//		convertView.setBackgroundDrawable(R.drawable.corner_list_item);
-//		convertView.setBackgroundResource(R.drawable.bk2);
+
 	}
 	class ViewHolder{
 		
@@ -99,7 +105,10 @@ public class ExpenseFragment extends Fragment {
 			ViewHolder holder = null;
 			if (convertView==null){
 				holder = new ViewHolder();
-				convertView = mInflater.inflate(R.layout.listitem_report, null);
+				if (index==1)
+					convertView = mInflater.inflate(R.layout.listitem_report, null);
+				else
+					convertView = mInflater.inflate(R.layout.listitem_leftright, null);
 				initListItem(holder,convertView);
 				
 			}else{

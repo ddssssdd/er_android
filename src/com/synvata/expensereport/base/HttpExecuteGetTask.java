@@ -8,6 +8,13 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -25,7 +32,24 @@ public abstract class HttpExecuteGetTask extends AsyncTask<String, Void, String>
 
 	@Override
 	abstract protected void onPostExecute(String result); 
-	private String httpGetUrl(final String urlString) throws IOException
+	private String httpGetUrl(final String urlString){
+		try {
+			
+			String httpUrl = HttpSettings.ServerUrl+urlString;
+			HttpClient client = new DefaultHttpClient();
+			HttpGet get = new HttpGet(httpUrl);
+			HttpResponse response = client.execute(get);
+			int status_code = response.getStatusLine().getStatusCode();
+			if (status_code >= 300) {
+				return null;
+			}
+			HttpEntity entity = response.getEntity();
+			return EntityUtils.toString(entity);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	private String httpGetUrl_old(final String urlString) throws IOException
 	{
 		InputStream is = null;
 		try

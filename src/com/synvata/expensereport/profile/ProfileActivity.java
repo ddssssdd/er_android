@@ -183,22 +183,5 @@ public class ProfileActivity extends FragmentActivity implements
 			return _sections.get(position).title;
 		}
 	}
-	public class CellData implements Serializable
-	{
 	
-		private static final long serialVersionUID = 1L;
-		public String Title;
-		public String Detail;
-		public String Url;
-	}
-	public class ProfileSection
-	{
-		public String title;
-		public ArrayList<CellData> items;
-		public ProfileSection()
-		{
-			items = new ArrayList<CellData>();
-		}
-	}
-
 }

@@ -3,7 +3,6 @@ package com.synvata.expensereport.profile;
 import java.util.List;
 
 import com.synvata.expensereport.R;
-import com.synvata.expensereport.profile.ProfileActivity.CellData;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
